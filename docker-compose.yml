@@ -1,0 +1,40 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+    command: bundle exec puma -C config/puma.rb
+    volumes:
+      - .:/baby-growth
+      - public-data:/baby-growth/public
+      - tmp-data:/baby-growth/tmp
+      - log-data:/baby-growth/log
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-volume:/var/lib/mysql
+
+  web:
+    build:
+      context: containers/nginx
+    volumes:
+      - public-data:/baby-growth/public
+      - tmp-data:/baby-growth/tmp
+    ports:
+      - 80:80
+    depends_on:
+      - app
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
+  db-volume:
