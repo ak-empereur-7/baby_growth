@@ -68,4 +68,5 @@ yarn-debug.log*
 
 # add developer
 .DS_Store
+.vscode
 database.yml

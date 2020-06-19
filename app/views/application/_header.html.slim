@@ -1,0 +1,37 @@
+nav.navbar.navbar-expand-lg.navbar-light.pl-5.pr-5.pt-2.pb-2
+    div.image
+    =link_to(image_tag('logo.png', class: 'navbar-logo'), root_path, class: 'navbar-brand')
+
+    button.navbar-toggler type="button" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替"
+        span.navbar-toggler-icon
+    
+    #Navbar.collapse.navbar-collapse
+        form.form-inline.my-2.my-lg-0.ml-2
+            input.form-control.mr-sm-2 type="search" placeholder="キーワードを入力" aria-label="検索..."
+        
+        ul.navbar-nav.ml-auto.mr-5
+            li.nav-item.ml-2
+                a.nav-link-bar.nav-link.text-white href="#"
+                    | お気に入り一覧
+            li.nav-item.ml-2
+                a.nav-link-bar.nav-color.nav-link.text-white href="#"
+                    | 投稿する
+            - if user_signed_in?
+                li.nav-item.dropdown
+                    a#navbarDropdown.nav-link-bar.nav-link.dropdown-toggle.text-white href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        | アイコン
+                    .dropdown-menu aria-labelledby="navbarDropdown"
+                        a.dropdown-item href="#"
+                            | マイページ
+                        .dropdown-divider
+                        a.dropdown-item href="#"
+                            | 下書き一覧
+                        .dropdown-divider
+                        .dropdown-item
+                          =link_to 'ログアウト', logout_path, class: 'dropdown-link'
+            - else
+                li.nav-item.ml-2
+                    a#register.nav-link-bar.nav-link.text-white href="#"
+                        | ユーザ登録
+                li.nav-item.ml-2
+                    =link_to 'ログイン', login_path, class: 'nav-link-bar nav-link text-white'
