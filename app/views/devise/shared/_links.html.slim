@@ -1,0 +1,6 @@
+- if controller_name != 'sessions'
+  = link_to "ログイン", login_path
+  br/
+- if devise_mapping.registerable? && controller_name != 'registrations'
+  = link_to "新規登録", signup_path
+  br/
